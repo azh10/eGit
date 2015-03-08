@@ -2,12 +2,10 @@ package pack;
 
 public class Teacher extends Person{
 	private int departId;
-	private int salary;
 	
-	public Teacher(String name, int age, int departId, int salary) {
-		super(name, age);
+	public Teacher(String name, int departId) {
+		super(name);
 		setDepartId(departId);
-		setSalary(salary);
 	}
 
 	public int getDepartId() {
@@ -17,15 +15,4 @@ public class Teacher extends Person{
 	public void setDepartId(int departId) {
 		this.departId = departId;
 	}
-
-	public int getSalary() {
-		return salary;
-	}
-
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
-	
-	
-
 }
