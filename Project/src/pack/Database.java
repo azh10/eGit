@@ -174,6 +174,7 @@ public class Database extends JFrame implements ActionListener{
 		
 		data.setBounds(5,155,275,200);
 		data.setBackground(Color.blue);
+		data.setEditable(false);
 		totalGUI.add(data);
 				
 		totalGUI.setOpaque(true);

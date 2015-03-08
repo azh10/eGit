@@ -1,18 +1,18 @@
 package pack;
 
 public class Teacher extends Person{
-	private int departId;
+	private String departId;
 	
-	public Teacher(String name, int departId) {
+	public Teacher(String name, String departId) {
 		super(name);
 		setDepartId(departId);
 	}
 
-	public int getDepartId() {
+	public String getDepartId() {
 		return departId;
 	}
 
-	public void setDepartId(int departId) {
+	public void setDepartId(String departId) {
 		this.departId = departId;
 	}
 }
