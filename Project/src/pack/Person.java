@@ -1,24 +1,45 @@
 package pack;
 
 public class Person extends Object {
-	private String name;
+	private String firstName;
+	private String lastName;
+	private int age;
 	
-	public Person(String name){
+	public Person(String firstName, String lastName, int age){
 		super();
-		setName(name);
+		setFirstName(firstName);
+		setFirstName(firstName);
+		setLastName(lastName);
+		setAge(age);
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	public String toString(){
 		String result;
-		result = name;
+		result = firstName +" "+ lastName +"[age: "+ age +"]";
 		return result;
 	}
 	

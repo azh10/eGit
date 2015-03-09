@@ -1,6 +1,6 @@
 package pack;
 
 public interface StudentTA{
-	public String getId();
-	public void setId(String id);
+	public String getStudentID();
+	public void setStudentID(String studentID);
 }

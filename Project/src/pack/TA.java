@@ -1,19 +1,29 @@
 package pack;
 
 public class TA extends Teacher implements StudentTA{
-	private String id;
+	private String studentID;
+	private int seniority;
 
+	public TA(String firstName, String lastName, int age, String departId, int salary, String studentID, int seniority) {
+		super(firstName, lastName, age, departId, salary);
+		setStudentID(studentID);
+		setSeniority(seniority);
+	}
 	
-	public TA(String name, String departId, String id) {
-		super(name, departId);
-		setId(id);	
+	public String getStudentID() {
+		return studentID;
 	}
 
-	public String getId() {
-		return id;
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
 	}
 
-	public void setId(String id) {
-		this.id = id;		
+	public int getSeniority() {
+		return seniority;
 	}
+
+	public void setSeniority(int seniority) {
+		this.seniority = seniority;
+	}
+
 }

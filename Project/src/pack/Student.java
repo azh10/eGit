@@ -1,24 +1,34 @@
 package pack;
 
 public class Student extends Person {
-	private int id;
+	private String studentID;
+	private int seniority; 
 	
-	public Student(String name, int id) {
-		super(name);
-		setId(id);
+	public Student(String firstName, String lastName, int age, String studentID, int seniority) {
+		super(firstName, lastName, age);
+		setStudentID(studentID);
+		setSeniority(seniority);
 	}
 
-	public int getId() {
-		return id;
+	public String getStudentID() {
+		return studentID;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public int getSeniority() {
+		return seniority;
+	}
+
+	public void setSeniority(int seniority) {
+		this.seniority = seniority;
+	}
+
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
 	}
 	
 	public String toString(){
 		String result;
-		result = super.toString() +"/tStudent id ["+ id +"]";
+		result = super.toString() +"/t[Student ID: "+ studentID +"]";
 		return result;
 	}
 
