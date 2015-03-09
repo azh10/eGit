@@ -1,23 +1,13 @@
 package pack;
 
-import java.util.Scanner;
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.*;
-
-import java.awt.color.*;
+import java.io.IOException;
 
 public class GP2{
-	public static void main(String[] args){
-		//new GP2();
-		SwingUtilities.invokeLater(new Runnable(){
-			public void run(){
-				Database.caShow(0);
-			}
-		});
-		
+	public static void main(String[] args) throws IOException{
+		Database.caShow(0);
 	}
+	//probably useless code not sure yet
+{
 //	JPanel titlePanel, score, bts;
 //	JLabel redL, blueL, myL;
 //	JButton selectBt, removeBt;
@@ -32,20 +22,20 @@ public class GP2{
 //	JRadioButton teacher = new JRadioButton("Teacher");
 //	JRadioButton ta = new JRadioButton("TA");
 //	ButtonGroup btG = new ButtonGroup();
-////	GP2(){
-////		super("Frame");
-////		setBounds(250,0,300,200);
-////		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-////		Container con = this.getContentPane();
-////		con.add(pane);
-////		//con.add(answer);
-////		bt.setMnemonic('y');
-////		bt.addActionListener(this);
-////		pane.add(answer);
-////		pane.add(bt);
-////		bt.requestFocus();
-////		setVisible(true);
-////	}
+//	GP2(){
+//		super("Frame");
+//		setBounds(250,0,300,200);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		Container con = this.getContentPane();
+//		con.add(pane);
+//		//con.add(answer);
+//		bt.setMnemonic('y');
+//		bt.addActionListener(this);
+//		pane.add(answer);
+//		pane.add(bt);
+//		bt.requestFocus();
+//		setVisible(true);
+//	}
 //	public void actionPerformed(ActionEvent event){
 //		Object source =  event.getSource();
 //		if(source == bt){
@@ -73,12 +63,12 @@ public class GP2{
 //		JPanel totalGUI = new JPanel();
 //		totalGUI.setLayout(null);
 //		
-////		titlePanel = new JPanel();
-////		titlePanel.setLayout(null);
-////		titlePanel.setLocation(0,0);
-////		titlePanel.setSize(250,30);
-////		totalGUI.add(titlePanel);
-////		
+//		titlePanel = new JPanel();
+//		titlePanel.setLayout(null);
+//		titlePanel.setLocation(0,0);
+//		titlePanel.setSize(250,30);
+//		totalGUI.add(titlePanel);
+//		
 //		student.setBounds(0,0,100,20);
 //		student.addActionListener(this);
 //		teacher.setBounds(100,0,100,20);
@@ -93,17 +83,17 @@ public class GP2{
 //		if(student.isSelected()){
 //			System.out.println("yup");
 //		}
-////		nameT.setText("NAME");
-////		nameT.setBounds(0, 0, 50, 20);
-////		//nameT.setEditable(false);
-////		totalGUI.add(nameT);
-////		
-////		one.setText("words");
-////		//one.setLocation(0, 30);
-////		one.setBounds(0, 30, 50, 20);
-////		one.setBackground(Color.white);
-////		totalGUI.add(one);
-////		
+//		nameT.setText("NAME");
+//		nameT.setBounds(0, 0, 50, 20);
+//		//nameT.setEditable(false);
+//		totalGUI.add(nameT);
+//		
+//		one.setText("words");
+//		//one.setLocation(0, 30);
+//		one.setBounds(0, 30, 50, 20);
+//		one.setBackground(Color.white);
+//		totalGUI.add(one);
+//		
 //		bts = new JPanel();
 //		bts.setLayout(null);
 //		bts.setLocation(10,80);
@@ -148,4 +138,5 @@ public class GP2{
 //		frame.setSize(300, 200);
 //		frame.setVisible(true);
 //	}
+}
 }

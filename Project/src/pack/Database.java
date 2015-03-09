@@ -1,11 +1,18 @@
 package pack;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.awt.Container;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 
 public class Database extends JFrame implements ActionListener{
 	JPanel titlePanel, score, bts;
@@ -26,11 +34,14 @@ public class Database extends JFrame implements ActionListener{
 	TextField departidF = new TextField();
 	TextField field = new TextField();
 	TextField data = new TextField();
+	JTextArea area = new JTextArea();
+	static String textData = "";
 	JLabel title = new JLabel();
 	JLabel nameT = new JLabel();
 	JLabel idT = new JLabel();
 	JLabel departidT = new JLabel();
 	Container con = this.getContentPane();
+	RandomAccessFile file = null;
 	
 	JRadioButton student = new JRadioButton("Student");
 	JRadioButton teacher = new JRadioButton("Teacher");
@@ -46,17 +57,32 @@ public class Database extends JFrame implements ActionListener{
 		}
         if(source == selectBt){
         	if(student.isSelected()){
-    			caShow(1);
+        		int value = 1;
+        		try {
+					readFile(value);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+    			caShow(value);
     		}
         	if(teacher.isSelected()){
-    			caShow(2);
+        		int value = 2;
+        		try {
+					readFile(value);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+    			caShow(value);
     		}
         	if(ta.isSelected()){
-    			caShow(3);
+        		int value = 3;
+        		try {
+					readFile(value);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+    			caShow(value);
     		}
-        }
-        else if(source == removeBt){
-        	answer.setText("removeBt");
         }
 	}
 	
@@ -64,12 +90,6 @@ public class Database extends JFrame implements ActionListener{
 		JPanel totalGUI = new JPanel();
 		totalGUI.setLayout(null);
 		
-//		titlePanel = new JPanel();
-//		titlePanel.setLayout(null);
-//		titlePanel.setLocation(0,0);
-//		titlePanel.setSize(250,30);
-//		totalGUI.add(titlePanel);
-//		
 		student.setBounds(0,0,100,20);
 		student.addActionListener(this);
 		teacher.setBounds(100,0,100,20);
@@ -80,18 +100,7 @@ public class Database extends JFrame implements ActionListener{
 		totalGUI.add(student);
 		totalGUI.add(teacher);
 		totalGUI.add(ta);
-		
-//		nameT.setText("NAME");
-//		nameT.setBounds(0, 0, 50, 20);
-//		//nameT.setEditable(false);
-//		totalGUI.add(nameT);
-//		
-//		one.setText("words");
-//		//one.setLocation(0, 30);
-//		one.setBounds(0, 30, 50, 20);
-//		one.setBackground(Color.white);
-//		totalGUI.add(one);
-//		
+			
 		bts = new JPanel();
 		bts.setLayout(null);
 		bts.setLocation(10,40);
@@ -103,17 +112,82 @@ public class Database extends JFrame implements ActionListener{
 		selectBt.setSize(240,30);
 		selectBt.addActionListener(this);
 		bts.add(selectBt);
-		
-//		removeBt = new JButton("Remove");
-//		removeBt.setLocation(120, 0);
-//		removeBt.setSize(100, 30);
-//		removeBt.addActionListener(this);
-//		bts.add(removeBt);
 				
 		totalGUI.setOpaque(true);
 		return totalGUI;
 	}
 	
+	public void readFile(int o) throws IOException {
+		//System.out.println("words");
+		if(o == 3){
+			file = new RandomAccessFile("taData.txt", "r");
+		}else if(o == 2){
+			file = new RandomAccessFile("tData.txt", "r");
+		}else if(o == 1){
+			file = new RandomAccessFile("sData.txt", "r");
+		}
+		textData = file.readLine();
+		textData += "\n"+ file.readLine();
+		textData += "\n"+ file.readLine();
+		System.out.println(textData);
+		file.close();
+		
+		
+		
+		
+//      PrintReader inputStream = null;
+//      PrintWriter outputStream = null;
+//
+//      try {
+//          inputStream = new PrintReader("taData.txt");
+//          outputStream = new PrintWriter(new FileWriter("characteroutput.txt"));
+//
+//          String l;
+//          while ((l = inputStream.readLine()) != null) {
+//          	//System.out.println(l);
+//              outputStream.println(l);
+//              textData += ""+ l;
+//              
+//          }
+//          //System.out.println(textData);
+//      } finally {
+//          if (inputStream != null) {
+//              inputStream.close();
+//          }
+//          if (outputStream != null) {
+//              outputStream.close();
+//          }
+//      }
+
+	}
+	
+	public void add(int i, String s1, String s2) throws IOException {
+		//System.out.println("words");
+
+        BufferedReader inputStream = null;
+        PrintWriter outputStream = null;
+        
+        try {
+            outputStream = new PrintWriter(new FileWriter("taData.txt"));
+
+            String l;
+            while ((l = inputStream.readLine()) != null) {
+            	//System.out.println(l);
+            	//if()
+                outputStream.println(l);
+                textData += ""+ l;
+                
+            }
+            //System.out.println(textData);
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
+	}
 	public JPanel dataPanel (String in){
 		JPanel totalGUI = new JPanel();
 		totalGUI.setLayout(null);
@@ -140,6 +214,7 @@ public class Database extends JFrame implements ActionListener{
 			departidF.setBounds(110,30,75, 20);
 			totalGUI.add(departidF);
 		} else if(in.equals("TA")){
+			
 			idT.setText("ID");
 			idT.setBounds(110, 0, 50, 20);
 			totalGUI.add(idT);
@@ -155,7 +230,7 @@ public class Database extends JFrame implements ActionListener{
 		
 		bts = new JPanel();
 		bts.setLayout(null);
-		bts.setLocation(10,70);
+		bts.setLocation(10,270);
 		bts.setSize(240,70);
 
 		totalGUI.add(bts);
@@ -172,10 +247,17 @@ public class Database extends JFrame implements ActionListener{
 		removeBt.addActionListener(this);
 		bts.add(removeBt);
 		
-		data.setBounds(5,155,275,200);
-		data.setBackground(Color.blue);
-		data.setEditable(false);
-		totalGUI.add(data);
+		//System.out.println(textData);
+//		data.setBounds(5,155,275,200);
+//		data.setBackground(Color.white);
+//		data.setEditable(false);
+//		data.setText(textData);
+		area.setBounds(5, 55, 275, 200);
+		area.setBackground(Color.white);
+		area.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		area.setEditable(false);
+		area.setText(textData);
+		totalGUI.add(area);
 				
 		totalGUI.setOpaque(true);
 		return totalGUI;
@@ -184,6 +266,7 @@ public class Database extends JFrame implements ActionListener{
 	public static void caShow(int choice){
 		JFrame.setDefaultLookAndFeelDecorated(false);
 		JFrame frame = new JFrame();
+		//System.out.println("in caShow"+ textData);
 		switch(choice){
 			case 0:
 				frame = new JFrame("Database");
@@ -211,7 +294,7 @@ public class Database extends JFrame implements ActionListener{
 				frame.setSize(300, 400);
 				break;
 			default:
-				System.out.println("Something is wrong...");
+				//System.out.println("Something is wrong...");
 		}
 		frame.setVisible(true);
 	}
