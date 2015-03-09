@@ -27,7 +27,6 @@ public class Database extends JFrame implements ActionListener{
 	JLabel redL, blueL;
 	JButton selectBt, addBt, removeBt;
 	JPanel pane = new JPanel();
-	JButton bt = new JButton();
 	JLabel answer = new JLabel("");
 	TextField nameF = new TextField();
 	TextField idF = new TextField();
@@ -36,6 +35,7 @@ public class Database extends JFrame implements ActionListener{
 	TextField data = new TextField();
 	JTextArea area = new JTextArea();
 	static String textData = "";
+	static int value = -1;
 	JLabel title = new JLabel();
 	JLabel nameT = new JLabel();
 	JLabel idT = new JLabel();
@@ -50,14 +50,38 @@ public class Database extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent event){
 		Object source =  event.getSource();
-		if(source == bt){
-			answer.setText("Button Pressed");
-			JOptionPane.showMessageDialog(null, "I hear You", "Message Dialog", JOptionPane.PLAIN_MESSAGE);
-			setVisible(true);
+		if(source == addBt){
+			textData = "";
+			if(value == 1){
+				try {
+					add(value, nameF.getText(), idF.getText());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(value == 2){
+				try {
+					add(value, nameF.getText(), departidF.getText());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if(value == 3){
+				try {
+					add(value, nameF.getText(), idF.getText(), departidF.getText());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			nameF.setText("");
+			idF.setText("");
+			departidF.setText("");
 		}
         if(source == selectBt){
+        	textData = "";
         	if(student.isSelected()){
-        		int value = 1;
+        		value = 1;
+        		System.out.println(value);
         		try {
 					readFile(value);
 				} catch (IOException e) {
@@ -66,7 +90,7 @@ public class Database extends JFrame implements ActionListener{
     			caShow(value);
     		}
         	if(teacher.isSelected()){
-        		int value = 2;
+        		value = 2;
         		try {
 					readFile(value);
 				} catch (IOException e) {
@@ -75,7 +99,7 @@ public class Database extends JFrame implements ActionListener{
     			caShow(value);
     		}
         	if(ta.isSelected()){
-        		int value = 3;
+        		value = 3;
         		try {
 					readFile(value);
 				} catch (IOException e) {
@@ -83,6 +107,15 @@ public class Database extends JFrame implements ActionListener{
 				}
     			caShow(value);
     		}
+        }
+        if(source == removeBt){
+			try {
+				remove(value, nameF.getText());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        	
+        	nameF.setText("");
         }
 	}
 	
@@ -126,15 +159,14 @@ public class Database extends JFrame implements ActionListener{
 		}else if(o == 1){
 			file = new RandomAccessFile("sData.txt", "r");
 		}
-		textData = file.readLine();
-		textData += "\n"+ file.readLine();
-		textData += "\n"+ file.readLine();
+		String str;
+		while((str = file.readLine()) != null){
+			textData += str +"\n";
+		}
 		System.out.println(textData);
 		file.close();
-		
-		
-		
-		
+	}
+	{
 //      PrintReader inputStream = null;
 //      PrintWriter outputStream = null;
 //
@@ -161,32 +193,79 @@ public class Database extends JFrame implements ActionListener{
 
 	}
 	
-	public void add(int i, String s1, String s2) throws IOException {
-		//System.out.println("words");
-
-        BufferedReader inputStream = null;
-        PrintWriter outputStream = null;
-        
-        try {
-            outputStream = new PrintWriter(new FileWriter("taData.txt"));
-
-            String l;
-            while ((l = inputStream.readLine()) != null) {
-            	//System.out.println(l);
-            	//if()
-                outputStream.println(l);
-                textData += ""+ l;
-                
-            }
-            //System.out.println(textData);
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-            if (outputStream != null) {
-                outputStream.close();
-            }
-        }
+	public void add(int o, String s1, String s2) throws IOException {
+		System.out.println("words");
+		if(o == 3){
+			file = new RandomAccessFile("taData.txt", "rw");
+		}else if(o == 2){
+			file = new RandomAccessFile("tData.txt", "rw");
+		}else if(o == 1){
+			file = new RandomAccessFile("sData.txt", "rw");
+		}
+		String str;
+		while((str = file.readLine()) != null){
+			textData += str +"\n";
+		}
+		String l = s1 +" ["+ s2 +"] \n";
+		textData += l;
+		file.writeBytes(l);
+		
+		System.out.println(textData);
+		area.setText(textData);
+		textData = "";
+		file.close();
+	}
+	public void add(int o, String s1, String s2, String s3) throws IOException {
+		System.out.println("words "+ value);
+		if(o == 3){
+			file = new RandomAccessFile("taData.txt", "rw");
+		}else if(o == 2){
+			file = new RandomAccessFile("tData.txt", "rw");
+		}else if(o == 1){
+			file = new RandomAccessFile("sData.txt", "rw");
+		}
+		String str;
+		while((str = file.readLine()) != null){
+			textData += str +"\n";
+		}
+		String l = s1 +" ["+ s2 +"] ["+ s3 +"]\n";
+		textData += l;
+		file.writeBytes(l);
+		
+		System.out.println(textData);
+		area.setText(textData);
+		textData = "";
+		file.close();
+	}
+	public void remove(int o, String s1) throws IOException{
+		if(o == 3){
+			file = new RandomAccessFile("taData.txt", "rw");
+		}else if(o == 2){
+			file = new RandomAccessFile("tData.txt", "rw");
+		}else if(o == 1){
+			file = new RandomAccessFile("sData.txt", "rw");
+		}
+		
+		int counter = 0;
+		int end = s1.length() - 1;
+		
+		for(int i = 0; i <= end; i++){
+			char c = file.readChar();
+//			System.out.println(s1);
+			System.out.println(s1.charAt(i) +" "+ c);
+			if(s1.charAt(i) == c){
+				counter++;
+				if(counter == end){
+					System.out.println("REMOVE");
+				}else{
+					System.out.println(c);
+				}
+			}
+			
+		}
+		
+		
+		
 	}
 	public JPanel dataPanel (String in){
 		JPanel totalGUI = new JPanel();
