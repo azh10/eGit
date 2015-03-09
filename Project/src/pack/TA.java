@@ -9,12 +9,10 @@ public class TA extends Teacher implements StudentTA{
 		setId(id);	
 	}
 
-	@Override
 	public String getId() {
 		return id;
 	}
 
-	@Override
 	public void setId(String id) {
 		this.id = id;		
 	}
